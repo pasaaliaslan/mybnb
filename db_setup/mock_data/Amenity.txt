@@ -1,0 +1,46 @@
+Hair Dryer	Bathroom
+Washer	Bedroom and Laundary
+Dryer	Bedroom and Laundary
+Iron	Bedroom and Laundary
+Ironing Board	Bedroom and Laundary
+Tennis Court	Entertainment
+Movie Theatre	Entertainment
+TV with Premium Cable	Entertainment
+Sonos Sound System	Entertainment
+Exercise Equipment	Entertainment
+Ping Pong Table	Entertainment
+Arcade Games	Entertainment
+Game Room	Entertainment
+Children's Dinnerware	Family
+Board Games	Family
+Children's Playroom	Family
+Central Air Conditioning	Heating and Cooling
+Heating	Heating and Cooling
+Smoke Alarm	Home Safety
+Carbon Monoxide Alarm	Home Safety
+Wifi	Internet and Office
+Dedicated Workspace	Internet and Office
+Kitchen	Kitchen and Dining
+Refrigerator	Kitchen and Dining
+Cooking Basics	Kitchen and Dining
+Dishes and Silverware	Kitchen and Dining
+Dishwasher	Kitchen and Dining
+Coffee Maker	Kitchen and Dining
+Breakfast Bar	Kitchen and Dining
+Dining Table	Kitchen and Dining
+Beach Access	Location
+Resort Access	Location
+Private Backyard	Outdoor
+Fire Pit	Outdoor
+Outdoor Furniture	Outdoor
+Outdoor Dining Area	Outdoor
+Outdoor Kitchen	Outdoor
+BBQ Grill	Outdoor
+Sun Loungers	Outdoor
+Private Outdoor Pool	Parking and Facilities
+Private Hot Tub	Parking and Facilities
+Sauna	Parking and Facilities
+Free Driveway	Parking Parking and Facilities
+Free Street	Parking	Parking and Facilities
+EV Charger	Parking and Facilities
+Private Gym	Parking and Facilities

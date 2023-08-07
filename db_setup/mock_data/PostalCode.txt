@@ -1,0 +1,14 @@
+Q1W2E3	Miami	Florida	United States
+T5Y6U7	Dubai	Dubai	United Arab Emirates
+W2E3R4	Toronto	Ontario	Canada
+E7H8J9	New York City	New York	United States
+G7H8J9	Los Angeles	California	United States
+D5G7H8	Tegel	Berlin	Germany
+M1N2B3	Toronto	Ontario	Canada
+M1N2B4	Toronto	Ontario	Canada
+M1N3C4	Toronto	Ontario	Canada
+M1A3C4	Toronto	Ontario	Canada
+M2A3C4	Toronto	Ontario	Canada
+N2A3C4	Toronto	Ontario	Canada
+Z2A3C4	Toronto	Ontario	Canada
+K2A3C4	Toronto	Ontario	Canada

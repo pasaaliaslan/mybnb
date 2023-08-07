@@ -1,0 +1,12 @@
+43.77404	-79.21796	A Street	M1N2B3	Toronto	Ontario	Canada
+43.77322	-79.21772	B Street	M1N2B3	Toronto	Ontario	Canada
+43.77298	-79.21720	C Street	M1N2B3	Toronto	Ontario	Canada
+43.77409	-79.21746	D Street	M1N2B3	Toronto	Ontario	Canada
+43.77244	-79.21667	E Street	M1N2B3	Toronto	Ontario	Canada
+43.77424	-79.21720	F Street	M1N2B3	Toronto	Ontario	Canada
+43.77432	-79.21706	G Street	M1N2B3	Toronto	Ontario	Canada
+43.77433	-79.21590	G Street	M1N2B3	Toronto	Ontario	Canada
+33.94496	-118.40952	Qwerty Street	G7H8J9	Los Angeles	California	United States
+33.94480	-118.40932	Qwerty Street	G7H8J9	Los Angeles	California	United States
+33.94460	-118.40910	Qwerty Street	G7H8J9	Los Angeles	California	United States
+52.36477	13.51416	Oprah Blv	D5G7H8	Tegel	Berlin	Germany

@@ -1,0 +1,20 @@
+Xyz Street	Q1W2E3	Miami	Florida	United States
+Abc Street	T5Y6U7	Dubai	Dubai	United Arab Emirates
+Def Blv	W2E3R4	Toronto	Ontario	Canada
+Fog	Square	E7H8J9	New York City	New York	United States
+Qwerty Street	G7H8J9	Los Angeles	California	United States
+Oprah Blv	D5G7H8	Tegel	Berlin	Germany
+A Street	M1N2B3	Toronto	Ontario	Canada
+B Street	M1N2B3	Toronto	Ontario	Canada
+C Street	M1N2B3	Toronto	Ontario	Canada
+D Street	M1N2B3	Toronto	Ontario	Canada
+E Street	M1N2B3	Toronto	Ontario	Canada
+F Street	M1N2B3	Toronto	Ontario	Canada
+G Street	M1N2B3	Toronto	Ontario	Canada
+Q Street	M1N2B4	Toronto	Ontario	Canada
+W Street	M1N3C4	Toronto	Ontario	Canada
+E Street	M1A3C4	Toronto	Ontario	Canada
+R Street	M2A3C4	Toronto	Ontario	Canada
+T Street	N2A3C4	Toronto	Ontario	Canada
+Y Street	Z2A3C4	Toronto	Ontario	Canada
+U Street	K2A3C4	Toronto	Ontario	Canada

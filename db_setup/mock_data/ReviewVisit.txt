@@ -1,0 +1,16 @@
+2023-08-05 00:00:00	1	Super clean, spacious rooms, and friendly host. Highly recommended stay!	4
+2023-08-05 00:00:00	2	Incredible amenities, felt like home, would book again for sure!	5
+2023-08-05 00:00:00	3	Fantastic decor, great value, and easy check-in process. A gem!	3
+2023-08-05 00:00:00	4	The pool was amazing, had a blast! Will come back!	4
+2023-08-05 00:00:00	5	Lovely neighborhood, close to attractions, had a wonderful time!	5
+2023-08-05 00:00:00	6	Charming place, beautiful garden, and excellent communication with the host.	3
+2023-08-05 00:00:00	7	Quiet and peaceful, slept like a baby! Thank you, host!	4
+2023-08-05 00:00:00	8	Everything was just perfect, exceeded our expectations. Thank you!	5
+2023-08-05 00:00:00	9	Wonderful stay, felt like a retreat. Can't wait to return!	3
+2023-08-05 00:00:00	10	Immaculate cleanliness, stunning design, and top-notch amenities. Loved it!	4
+2023-08-05 00:00:00	11	A true hidden gem, exceeded expectations, and wonderful hospitality.	5
+2023-08-05 00:00:00	12	Breathtaking views, peaceful surroundings, and an unforgettable experience overall.	3
+2023-08-05 00:00:00	13	The host was exceptional, prompt responses, and made us comfortable.	4
+2023-08-05 00:00:00	14	Great location, close to everything, and fantastic restaurants nearby.	5
+2023-08-05 00:00:00	15	Cozy fireplace, perfect for winter, and delightful morning coffee provided.	3
+2023-08-05 00:00:00	16	Spacious and bright, a great place for family gatherings. Recommended!	4

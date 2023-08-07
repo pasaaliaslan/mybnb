@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Listing</title>
+</head>
+<body>
+    <form onsubmit="createListing(); return false;" id="create-listing-form">
+      <label for="residenceType">Residence Type</label>
+      <input type="text" id="residenceType" name="residenceType"><br><br>
+
+      <label for="numberOfBedrooms">Number of Bedrooms</label>
+      <input type="text" id="numberOfBedrooms" name="numberOfBedrooms"><br><br>
+
+      <label for="numberOfBeds">Number of Beds</label>
+      <input type="text" id="numberOfBeds" name="numberOfBeds"><br><br>
+
+      <label for="numberOfBaths">Number of Baths</label>
+      <input type="text" id="numberOfBaths" name="numberOfBaths"><br><br>
+
+      <label for="roomNumber">Room Number (Optional)</label>
+      <input type="text" id="roomNumber" name="roomNumber"><br><br>
+
+      <label for="description">Description</label>
+      <input type="text" id="description" name="description"><br><br>
+
+      <label for="pricePerNight">Price Per Night</label>
+      <input type="text" id="pricePerNight" name="pricePerNight"><br><br>
+
+      <label for="availabilityStart">Availability Start</label>
+      <input type="text" id="availabilityStart" name="availabilityStart"><br><br>
+
+      <label for="availabilityEnd">Availability End</label>
+      <input type="text" id="availabilityEnd" name="availabilityEnd"><br><br>
+
+      <input type="submit" value="Submit">
+    </form>
+    <script src="listing.js"></script>
+
+    <label for="country">Country</label>
+    <select id="country" form="create-listing-form">
+        <!-- Options will be dynamically populated here -->
+    </select>
+    <label for="subcountry">Subcountry</label>
+    <select id="subcountry" form="create-listing-form">
+        <!-- Options will be dynamically populated here -->
+    </select>
+    <label>City</label>
+    <select id="city" form="create-listing-form">
+        <!-- Options will be dynamically populated here -->
+    </select>
+    <script src="geograpy.js"></script>
+
+    <label for="longitude">Longitude</label>
+    <input type="text" id="longitude" name="longitude" form="create-listing-form"><br><br>
+
+    <label for="latitude">Latitude</label>
+    <input type="text" id="latitude" name="latitude" form="create-listing-form"><br><br>
+</body>
+</html>
