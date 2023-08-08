@@ -90,7 +90,7 @@ public class RenterRankingsByBookings extends Viewset {
 
         if (!filters.isEmpty()) {
             sqlString = String.join(" WHERE ", sqlString,
-                    filters.toString().replace(", ", " AND ").replace("[", "(").replace("]", ")"));
+                    filters.toString().replace(", ", " AND ").replace("[", "").replace("]", ""));
         }
 
         sqlString = String.format("%s GROUP BY renterUsername ORDER BY bookingCount DESC", sqlString);

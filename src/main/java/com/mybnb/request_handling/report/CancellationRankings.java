@@ -59,7 +59,6 @@ public class CancellationRankings extends Viewset {
         }
 
         JSONObject res = new JSONObject();
-        System.out.println("asdasd");
         res.put("hostRankings", hostRanking.getJSONArray("ranking"));
         res.put("renterRankings", renterRanking.getJSONArray("ranking"));
 

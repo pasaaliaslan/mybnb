@@ -19,6 +19,8 @@ public class ClientRequestHandler extends RequestHandler {
         viewsets.put("host", new Host(this.dao));
         viewsets.put("listing", new Listing(this.dao));
         viewsets.put("booking", new Booking(this.dao));
+        viewsets.put("amenity", new Amenity(this.dao));
+        viewsets.put("comment", new Comment(this.dao));
 
         return viewsets;
     }

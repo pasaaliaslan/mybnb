@@ -139,14 +139,13 @@ Get the rankings of the hosts by the number of listing in a specific location.
 
 Get the ranking of the renters by the number of bookings they made.
 
-### Body Params
+### Query Params
 
 ```JSON
 {
-    "dateRange": {
-        "startDate": string,
-        "endDate": string,
-    },
+
+    "startDate": string,
+    "endDate": string,
     "city"?: string,
     "country"?: string,
     "minBookingCount"?: number,
@@ -176,10 +175,8 @@ Get the ranking of the renters by the number of bookings they made.
 
 ```JSON
 {
-    "dateRange": {
-        "startDate": "2022-09-01",
-        "endDate": "2022-09-31",
-    },
+    "startDate": "2022-09-01",
+    "endDate": "2022-09-31",
     "city": "Toronto",
     "minBookingCount": 2,
 }
@@ -215,16 +212,10 @@ Get the ranking of the renters by the number of bookings they made.
 
 Get the ranking of the hosts and renters by the number of cancellations they made.
 
-### Body Params
+### Query Params
 
 ```JSON
 {
-    "dateRange"?: {
-        "startDate": string,
-        "endDate": string,
-    },
-    "minCancellationCount"?: number,
-    "maxCancellationCount"?: number,
 }
 ```
 
@@ -233,9 +224,13 @@ Get the ranking of the hosts and renters by the number of cancellations they mad
 ```JSON
 200 SUCCESS
 {
-    "users": {
-        "idNumber": string,
-        "cancellationCount": number,
+    "renterRankings": {
+        "username": string,
+        "numberOfCancelledBookings": number,
+    }[],
+    "hostRankings": {
+        "username": string,
+        "numberOfCancelledBookings": number,
     }[]
 }
 400 BAD_QUERY
@@ -246,41 +241,42 @@ Get the ranking of the hosts and renters by the number of cancellations they mad
 500 SERVER_ERROR
 ```
 
-### Sample Query
-
-```JSON
-{
-    "dateRange": {
-        "startDate": "2022-09-01",
-        "endDate": "2022-09-31",
-    },
-    "minCancellationCount": 10,
-    "maxCancellationCount": 22,
-}
-```
-
 ### Sample Response
 
 ```JSON
 {
-    "users": [
-        {
-            "idNumber": "123456789",
-            "bookingCount": 22,
-        },
-        {
-            "idNumber": "987654321",
-            "bookingCount": 13,
-        },
-        {
-            "idNumber": "192837465",
-            "bookingCount": 12,
-        },
-        {
-            "idNumber": "918273645",
-            "bookingCount": 12,
-        },
-    ]
+  "renterRankings": [
+    {
+        "numberOfCancelledBookings": 7,
+        "username": "leomessi"
+    },
+    {
+        "numberOfCancelledBookings": 4,
+        "username": "therock"
+    },
+    {
+        "numberOfCancelledBookings": 2,
+        "username": "cristiano"
+    }
+  ],
+  "hostRankings": [
+    {
+        "numberOfCancelledBookings": 7,
+        "username": "lebron10"
+    },
+    {
+        "numberOfCancelledBookings": 3,
+        "username": "person3"
+    },
+    {
+        "numberOfCancelledBookings": 2,
+        "username": "person4"
+    },
+    {
+        "numberOfCancelledBookings": 2,
+        "username": "person5"
+    }
+  ]
 }
 ```
 
