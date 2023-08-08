@@ -131,7 +131,7 @@ CREATE TABLE Listing (
   pricePerNight DECIMAL(10, 2) NOT NULL,
   availabilityStart DATE NOT NULL,
   availabilityEnd DATE,
-  isAvailable BOOLEAN DEFAULT 1,
+  isAvailable BOOLEAN DEFAULT 1, -- A listing is never deleted for the booking history. This flag mimics the logic of being 'deleted' or not.
   FOREIGN KEY (residenceId) REFERENCES Residence(id),
   PRIMARY KEY (id)
 ) ENGINE INNODB;
@@ -149,7 +149,7 @@ SET msg = 'availabilityEnd cannot be earlier than availabilityStart.';
 SIGNAL sqlstate '45000' SET message_text = msg;
 END IF;
 
-SET cond = (SELECT IF (COUNT(*) > 0, 1, 0) FROM Listing WHERE residenceId=NEW.residenceId) AND (SELECT IF (SUM(pass=1) = COUNT(*), 0, 1) FROM (SELECT availabilityStart >= NEW.availabilityEnd OR availabilityEnd <= NEW.availabilityStart AS pass FROM Listing WHERE residenceId=NEW.residenceId) AS T);
+SET cond = (SELECT IF (COUNT(*) > 0, 1, 0) FROM Listing WHERE residenceId=NEW.residenceId) AND (SELECT IF (SUM(pass=1) = COUNT(*), 0, 1) FROM (SELECT availabilityStart >= NEW.availabilityEnd OR availabilityEnd <= NEW.availabilityStart AS pass FROM Listing WHERE residenceId=NEW.residenceId AND isAvailable=1) AS T);
 
 IF cond THEN
 SET msg = 'There is a listing within the given availability range with the same residence.';
@@ -187,6 +187,7 @@ CREATE TABLE Booking (
   endDate DATE NOT NULL,
   renterUsername VARCHAR(50) NOT NULL,
   listingId INT(50) NOT NULL,
+  pricePerNight INT(50) NOT NULL DEFAULT -1,
   cancelledBy VARCHAR(10) NOT NULL DEFAULT 'NONE',
   CONSTRAINT checkCancelledBy CHECK (cancelledBy IN ('RENTER', 'HOST', 'NONE')),
   FOREIGN KEY (renterUsername) REFERENCES Renter(username),
@@ -198,6 +199,9 @@ delimiter |
 CREATE TRIGGER bookingTrig BEFORE INSERT ON Booking
 FOR EACH ROW BEGIN
 DECLARE msg VARCHAR(255);
+IF NEW.pricePerNight = -1 THEN
+SET NEW.pricePerNight = (SELECT pricePerNight FROM Listing WHERE Listing.id=NEW.listingId);
+END IF;
 IF NEW.startDate > NEW.endDate THEN
 SET msg = 'End date cannot be earlier than start date.';
 SIGNAL sqlstate '45000' SET message_text = msg;
@@ -206,7 +210,7 @@ IF NEW.startDate < (SELECT availabilityStart FROM Listing WHERE id=NEW.listingId
 SET msg = 'Booking should be within the availability range of the listing.';
 SIGNAL sqlstate '45000' SET message_text = msg;
 END IF;
-IF EXISTS(SELECT * FROM Booking WHERE Booking.listingId=NEW.listingId AND ((Booking.startDate <= NEW.startDate AND NEW.startDate <= Booking.endDate) OR (Booking.startDate <= NEW.endDate AND NEW.endDate <= Booking.endDate))) THEN
+IF 1 = (SELECT EXISTS(SELECT * FROM Booking WHERE Booking.listingId=NEW.listingId AND NEW.endDate > Booking.startDate AND Booking.endDate > NEW.startDate)) THEN
 SET msg = 'The listing is booked within the date range.';
 SIGNAL sqlstate '45000' SET message_text = msg;
 END IF;

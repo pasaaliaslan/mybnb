@@ -78,7 +78,7 @@ public class Host extends Viewset {
         mapping.put("username", requestBody.getString("username"));
 
         try {
-            this.dao.create(mapping, "Host");
+            this.dao.create(mapping, "Host", false);
         } catch (BaseSQLStatusException e) {
             return e.getHttpResponse();
         }

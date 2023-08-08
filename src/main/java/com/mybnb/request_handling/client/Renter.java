@@ -81,7 +81,7 @@ public class Renter extends Viewset {
         mapping.put("creditCardNumber", requestBody.getInt("creditCardNumber"));
 
         try {
-            this.dao.create(mapping, "Renter");
+            this.dao.create(mapping, "Renter", false);
         } catch (UnknownSQLException e) {
             return e.getHttpResponse();
         } catch (BaseSQLStatusException e) {
@@ -108,7 +108,7 @@ public class Renter extends Viewset {
             newMapping.put("creditCardNumber", requestBody.getInt("creditCardNumber"));
 
             try {
-                this.dao.update(newMapping, keyConditions, "Renter");
+                this.dao.update(newMapping, keyConditions, "Renter", false);
             } catch (UnknownSQLException e) {
                 return e.getHttpResponse();
             } catch (BaseSQLStatusException e) {

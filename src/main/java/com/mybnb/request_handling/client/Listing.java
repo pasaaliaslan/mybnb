@@ -97,14 +97,12 @@ public class Listing extends Viewset {
         HashMap<String, Object> mapping = new HashMap<String, Object>();
 
         // Try creating Residence.
+        String residenceFields[] = { "residenceTypeName", "hostUsername", "numberOfBedrooms", "numberOfBeds",
+                "numberOfBaths", "longitude", "latitude" };
         try {
-            mapping.put("residenceTypeName", requestBody.getString("residenceTypeName"));
-            mapping.put("hostUsername", requestBody.getString("hostUsername"));
-            mapping.put("numberOfBedrooms", requestBody.getInt("numberOfBedrooms"));
-            mapping.put("numberOfBeds", requestBody.getString("numberOfBeds"));
-            mapping.put("numberOfBaths", requestBody.getString("numberOfBaths"));
-            mapping.put("longitude", requestBody.getString("longitude"));
-            mapping.put("latitude", requestBody.getString("latitude"));
+            for (String field : residenceFields) {
+                mapping.put(field, requestBody.get(field));
+            }
 
             if (requestBody.has("roomNumber")) {
                 mapping.put("roomNumber", requestBody.getString("roomNumber"));
@@ -113,31 +111,84 @@ public class Listing extends Viewset {
             return Http.MESSAGE_RESPONSE("Missing residence information", Http.STATUS.BAD_REQUEST);
         }
 
+        int residenceId;
+
         try {
-            dao.create(mapping, "Residence");
+            residenceId = dao.create(mapping, "Residence", true);
         } catch (BaseSQLStatusException e) {
             return e.getHttpResponse();
         }
 
         // Try creating listing.
+        mapping.clear();
+        mapping.put("residenceId", residenceId);
 
-        return Http.MESSAGE_RESPONSE("Created Address successfully.", Http.STATUS.OK);
+        String listingFields[] = { "description", "pricePerNight", "availabilityStart", "availabilityEnd" };
+        try {
+            for (String field : listingFields) {
+                mapping.put(field, requestBody.get(field));
+            }
+
+        } catch (JSONException e) {
+            return Http.MESSAGE_RESPONSE("Missing listing information", Http.STATUS.BAD_REQUEST);
+        }
+
+        try {
+            dao.create(mapping, "Listing", false);
+        } catch (BaseSQLStatusException e) {
+            return e.getHttpResponse();
+        }
+
+        return Http.MESSAGE_RESPONSE("Listing added successfully.", Http.STATUS.OK);
     }
 
     @Override
     public HandlerResponse update(JSONObject queryParams, JSONObject requestBody) {
-        JSONObject responseBody = null;
-        responseBody = new JSONObject().put("listing", "update");
+        HashMap<String, Object> newMapping = new HashMap<String, Object>();
+        HashMap<String, Object> keyConditions = new HashMap<String, Object>();
 
-        return Http.JSON_RESPONSE(responseBody, Http.STATUS.OK);
+        if (!requestBody.has("listingId")) {
+            return Http.MESSAGE_RESPONSE("Missing listing id", Http.STATUS.BAD_REQUEST);
+        }
+
+        keyConditions.put("listingId", requestBody.getString("listingId"));
+
+        String listingFields[] = { "pricePerNight", "availabilityStart", "availabilityEnd" };
+
+        for (String field : listingFields) {
+            if (requestBody.has(field)) {
+                newMapping.put(field, requestBody.get(field));
+            }
+        }
+
+        try {
+            dao.update(newMapping, keyConditions, "Listing", false);
+        } catch (BaseSQLStatusException e) {
+            return e.getHttpResponse();
+        }
+
+        return Http.MESSAGE_RESPONSE("Updated listing successfully.", Http.STATUS.OK);
     }
 
     @Override
     public HandlerResponse delete(JSONObject queryParams, JSONObject requestBody) {
-        JSONObject responseBody = null;
-        responseBody = new JSONObject().put("listing", "delete");
+        HashMap<String, Object> newMapping = new HashMap<String, Object>();
+        HashMap<String, Object> keyConditions = new HashMap<String, Object>();
 
-        return Http.JSON_RESPONSE(responseBody, Http.STATUS.OK);
+        if (!requestBody.has("listingId")) {
+            return Http.MESSAGE_RESPONSE("Missing listing id", Http.STATUS.BAD_REQUEST);
+        }
+
+        keyConditions.put("listingId", requestBody.getString("listingId"));
+        newMapping.put("isAvailable", false);
+
+        try {
+            dao.update(newMapping, keyConditions, "Listing", false);
+        } catch (BaseSQLStatusException e) {
+            return e.getHttpResponse();
+        }
+
+        return Http.MESSAGE_RESPONSE("Updated listing successfully.", Http.STATUS.OK);
     }
 
 }

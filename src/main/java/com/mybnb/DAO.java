@@ -60,49 +60,40 @@ public final class DAO {
         }
     }
 
-    public int create(Map<String, Object> mapping, String tableName) throws BaseSQLStatusException {
+    public int create(Map<String, Object> mapping, String tableName, boolean returnsId) throws BaseSQLStatusException {
         String sqlQuery = this.buildInsertionQuery(mapping, tableName);
-
-        try {
-            System.out.println(String.format("QUERY: %s", sqlQuery));
-            Statement stmt = this.connection.createStatement();
-            int res = stmt.executeUpdate(sqlQuery);
-            stmt.close();
-
-            return res;
-        } catch (SQLException e) {
-            throw SQLStatusExceptions.getException(e);
-        }
+        return this.runUpdateQuery(sqlQuery, returnsId);
     }
 
     public int update(Map<String, Object> newMapping, Map<String, Object> keyConditions,
-            String tableName) throws BaseSQLStatusException {
-
+            String tableName, boolean returnsId) throws BaseSQLStatusException {
         String sqlQuery = this.buildUpdateQuery(newMapping, keyConditions, tableName);
-
-        try {
-            System.out.println(String.format("QUERY: %s", sqlQuery));
-            Statement stmt = this.connection.createStatement();
-            int res = stmt.executeUpdate(sqlQuery);
-            stmt.close();
-
-            return res;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw SQLStatusExceptions.getException(e);
-        }
+        return this.runUpdateQuery(sqlQuery, returnsId);
     }
 
     public int delete(Map<String, Object> keyConditions, String tableName) throws BaseSQLStatusException {
         String sqlQuery = this.buildDeleteQuery(keyConditions, tableName);
+        return this.runUpdateQuery(sqlQuery, false);
+    }
 
+    private int runUpdateQuery(String sqlQuery, boolean returnsId) throws BaseSQLStatusException {
         try {
-            System.out.println(String.format("QUERY: %s", sqlQuery));
             Statement stmt = this.connection.createStatement();
             int res = stmt.executeUpdate(sqlQuery);
+
+            if (returnsId) {
+                ResultSet rs = stmt.executeQuery("SELECT LAST_INSERT_ID() AS lastId");
+
+                while (rs.next()) {
+                    res = rs.getInt("lastId");
+                }
+            }
+
             stmt.close();
 
+            System.out.println(String.format("QUERY: %s", sqlQuery));
             return res;
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             throw SQLStatusExceptions.getException(e);

@@ -35,7 +35,7 @@ public class ClientHelpers {
         }
 
         try {
-            dao.create(mapping, "User");
+            dao.create(mapping, "User", false);
         } catch (BaseSQLStatusException e) {
             return e.getHttpResponse();
         }
@@ -71,7 +71,7 @@ public class ClientHelpers {
         mapping.put("username", requestBody.getString("username"));
 
         try {
-            dao.create(mapping, "livesIn");
+            dao.create(mapping, "livesIn", false);
         } catch (BaseSQLStatusException e) {
             return e.getHttpResponse();
         }
@@ -98,7 +98,7 @@ public class ClientHelpers {
         }
 
         try {
-            dao.update(newMapping, keyConditions, "User");
+            dao.update(newMapping, keyConditions, "User", false);
         } catch (BaseSQLStatusException e) {
             return e.getHttpResponse();
         }
@@ -140,7 +140,7 @@ public class ClientHelpers {
 
         // Try updating row in livesIn.
         try {
-            dao.update(mapping, keyConditions, "livesIn");
+            dao.update(mapping, keyConditions, "livesIn", false);
         } catch (BaseSQLStatusException e) {
             return e.getHttpResponse();
         }
@@ -165,7 +165,7 @@ public class ClientHelpers {
         }
 
         try {
-            dao.create(mapping, "PostalCode");
+            dao.create(mapping, "PostalCode", false);
         } catch (ForeignKeyFailException | UnknownSQLException e) {
             e.getHttpResponse();
         } catch (BaseSQLStatusException e) {
@@ -181,7 +181,7 @@ public class ClientHelpers {
         }
 
         try {
-            dao.create(mapping, "Address");
+            dao.create(mapping, "Address", false);
         } catch (UnknownSQLException e) {
             return e.getHttpResponse();
         } catch (BaseSQLStatusException e) {
@@ -190,24 +190,26 @@ public class ClientHelpers {
         return Http.MESSAGE_RESPONSE("Created Address", Http.STATUS.OK);
     }
 
-    public static HandlerResponse createLocation(DAO dao, JSONObject requestBody) {
-        HashMap<String, Object> mapping = new HashMap<String, Object>();
+    // public static HandlerResponse createLocation(DAO dao, JSONObject requestBody)
+    // {
+    // HashMap<String, Object> mapping = new HashMap<String, Object>();
 
-        JSONObject location;
+    // JSONObject location;
 
-        try {
-            location = requestBody.getJSONObject("location");
-            mapping.put("longitude", location.getDouble("longitude"));
-            mapping.put("latitude", location.getDouble("latitude"));
-            mapping.put("postalCode", location.getString("postalCode"));
-            mapping.put("cityName", location.getString("city"));
-            mapping.put("subcountryName", location.getString("subcountry"));
-            mapping.put("countryName", location.getString("country"));
-        } catch (JSONException e) {
-            return Http.MESSAGE_RESPONSE("Missing location information", Http.STATUS.BAD_REQUEST);
-        }
+    // try {
+    // location = requestBody.getJSONObject("location");
+    // mapping.put("longitude", location.getDouble("longitude"));
+    // mapping.put("latitude", location.getDouble("latitude"));
+    // mapping.put("postalCode", location.getString("postalCode"));
+    // mapping.put("cityName", location.getString("city"));
+    // mapping.put("subcountryName", location.getString("subcountry"));
+    // mapping.put("countryName", location.getString("country"));
+    // } catch (JSONException e) {
+    // return Http.MESSAGE_RESPONSE("Missing location information",
+    // Http.STATUS.BAD_REQUEST);
+    // }
 
-    }
+    // }
 
     public static String buildListingGetQuery(JSONObject requestBody) {
         String[] fieldsAsList = { "Listing.id AS listingId", "Residence.id AS residenceId", "description",
