@@ -347,21 +347,68 @@ Body Params
         "centerLatitude": number,
         "radius"?: number,
     },
-    "dateRange"?: {
-        "startDate": string,
-        "endDate": string,
-    },
+    "startDate": string,
+    "endDate": string,
     "amenities"?: string[]
 }
 ```
 
-## `GET` /listing/
-
 ## `POST` /listing/
+
+Create a renter listing.
+
+### Body Params
+
+```JSON
+{
+    "residenceTypeName": "Full House" | "Apartment" | "Room",
+    "hostUsername": string,
+    "numberOfBedrooms": number,
+    "numberOfBeds": number,
+    "numberOfBaths": number,
+    "roomNumber"?: number, // Valid if residenceTypeName is 'Room'
+    "description": string,
+    "pricePerNight": number,
+    "availabilityStart": string,
+    "availabilityEnd": string,
+    "address": {
+      "country": string,
+      "subcountry": string,
+      "city": string,
+      "postalCode": string,
+      "longitude": number,
+      "latitude": number,
+    }
+}
+```
+
+### Response
+
+```JSON
+200 SUCCESS
+
+500 SERVER ERROR
+
+400 BAD REQUEST
+{
+    "message": `A message indicating a problem in one of the inputs`
+}
+```
+
+### Sample Response
+
+```JSON
+400 SUCCESS
+{
+    "message": "Listing added successfully."
+}
+```
 
 ## `DELETE` /listing/
 
 ## `PUT` /listing/
+
+## `GET` /booking/
 
 ## `POST` /booking/
 

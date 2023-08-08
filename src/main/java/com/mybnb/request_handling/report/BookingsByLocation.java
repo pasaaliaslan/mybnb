@@ -87,7 +87,7 @@ public class BookingsByLocation extends Viewset {
 
         if (!filters.isEmpty()) {
             sqlString = String.join(" WHERE ", sqlString,
-                    filters.toString().replace(", ", " AND ").replace("[", "(").replace("]", ")"));
+                    filters.toString().replace(", ", " AND ").replace("[", "").replace("]", ""));
         }
 
         return sqlString;

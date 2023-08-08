@@ -96,9 +96,15 @@ public class Listing extends Viewset {
     public HandlerResponse create(JSONObject queryParams, JSONObject requestBody) {
         HashMap<String, Object> mapping = new HashMap<String, Object>();
 
+        HandlerResponse h = ClientHelpers.createLocation(dao, requestBody);
+
+        if (!Http.isSuccessResponse(h)) {
+            return h;
+        }
+
         // Try creating Residence.
         String residenceFields[] = { "residenceTypeName", "hostUsername", "numberOfBedrooms", "numberOfBeds",
-                "numberOfBaths", "longitude", "latitude" };
+                "numberOfBaths" };
         try {
             for (String field : residenceFields) {
                 mapping.put(field, requestBody.get(field));
@@ -107,6 +113,11 @@ public class Listing extends Viewset {
             if (requestBody.has("roomNumber")) {
                 mapping.put("roomNumber", requestBody.getString("roomNumber"));
             }
+
+            JSONObject address = requestBody.getJSONObject("address");
+
+            mapping.put("longitude", address.getDouble("longitude"));
+            mapping.put("latitude", address.getDouble("latitude"));
         } catch (JSONException e) {
             return Http.MESSAGE_RESPONSE("Missing residence information", Http.STATUS.BAD_REQUEST);
         }

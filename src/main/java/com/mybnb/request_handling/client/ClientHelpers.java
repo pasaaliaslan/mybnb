@@ -161,7 +161,7 @@ public class ClientHelpers {
             mapping.put("subcountryName", address.getString("subcountry"));
             mapping.put("countryName", address.getString("country"));
         } catch (JSONException e) {
-            return Http.MESSAGE_RESPONSE("Missing address information", Http.STATUS.BAD_REQUEST);
+            return Http.MESSAGE_RESPONSE("Missing postalCode information", Http.STATUS.BAD_REQUEST);
         }
 
         try {
@@ -177,7 +177,7 @@ public class ClientHelpers {
             mapping.put("postalCode", address.getString("postalCode"));
             mapping.put("streetName", address.getString("streetName"));
         } catch (JSONException e) {
-            return Http.MESSAGE_RESPONSE("Missing user information", Http.STATUS.BAD_REQUEST);
+            return Http.MESSAGE_RESPONSE("Missing address information", Http.STATUS.BAD_REQUEST);
         }
 
         try {
@@ -190,26 +190,40 @@ public class ClientHelpers {
         return Http.MESSAGE_RESPONSE("Created Address", Http.STATUS.OK);
     }
 
-    // public static HandlerResponse createLocation(DAO dao, JSONObject requestBody)
-    // {
-    // HashMap<String, Object> mapping = new HashMap<String, Object>();
+    public static HandlerResponse createLocation(DAO dao, JSONObject requestBody) {
+        HandlerResponse h = createAddress(dao, requestBody);
 
-    // JSONObject location;
+        if (!Http.isSuccessResponse(h)) {
+            return h;
+        }
 
-    // try {
-    // location = requestBody.getJSONObject("location");
-    // mapping.put("longitude", location.getDouble("longitude"));
-    // mapping.put("latitude", location.getDouble("latitude"));
-    // mapping.put("postalCode", location.getString("postalCode"));
-    // mapping.put("cityName", location.getString("city"));
-    // mapping.put("subcountryName", location.getString("subcountry"));
-    // mapping.put("countryName", location.getString("country"));
-    // } catch (JSONException e) {
-    // return Http.MESSAGE_RESPONSE("Missing location information",
-    // Http.STATUS.BAD_REQUEST);
-    // }
+        HashMap<String, Object> mapping = new HashMap<String, Object>();
 
-    // }
+        JSONObject location;
+
+        try {
+            location = requestBody.getJSONObject("address");
+            mapping.put("longitude", location.getDouble("longitude"));
+            mapping.put("latitude", location.getDouble("latitude"));
+            mapping.put("streetName", location.getString("streetName"));
+            mapping.put("postalCode", location.getString("postalCode"));
+            mapping.put("cityName", location.getString("city"));
+            mapping.put("subcountryName", location.getString("subcountry"));
+            mapping.put("countryName", location.getString("country"));
+        } catch (JSONException e) {
+            return Http.MESSAGE_RESPONSE("Missing location information",
+                    Http.STATUS.BAD_REQUEST);
+        }
+
+        try {
+            dao.create(mapping, "Location", false);
+        } catch (UnknownSQLException e) {
+            return e.getHttpResponse();
+        } catch (BaseSQLStatusException e) {
+        }
+
+        return Http.MESSAGE_RESPONSE("Created Location.", Http.STATUS.OK);
+    }
 
     public static String buildListingGetQuery(JSONObject requestBody) {
         String[] fieldsAsList = { "Listing.id AS listingId", "Residence.id AS residenceId", "description",

@@ -1,17 +1,18 @@
 # Report API (/report/)
 
+NOTE: Country, Subcountry, City, and PostalCode are weak entity sets, meaning
+the granular one requires others to work. For instance, only providing `city=Toronto` wouldn't be enough as the system would think about `city=Toronto` in different subcountries in different countries. Similarly, a subcountry requires country. Country could exist by itself in a query.
+
 ## `GET` /bookings_by_location/
 
 Gets all bookings satisfying the location query.
 
-### Body Params
+### Query Params
 
 ```JSON
 {
-    "dateRange": {
-        "startDate": string,
-        "endDate": string,
-    },
+    "startDate"?: string,
+    "endDate"?: string,
     "country"?: string,
     "subcountry"?: string,
     "city"?: string,
@@ -41,10 +42,10 @@ Gets all bookings satisfying the location query.
 
 ```JSON
 {
-    "dateRange": {
-        "startDate": "2023-09-01",
-        "endDate": "2023-09-31",
-    },
+    "startDate": "2023-09-01",
+    "endDate": "2023-09-31",
+    "country": "Canada",
+    "subcountry": "Ontario",
     "city": "Toronto",
 }
 ```
@@ -54,7 +55,7 @@ Gets all bookings satisfying the location query.
 ```JSON
 200 SUCCESS
 {
-    "bookings": [
+    "ids": [
         "123456789",
         "987654321",
         "192837465",
@@ -64,16 +65,18 @@ Gets all bookings satisfying the location query.
 }
 ```
 
-## `GET` /host_rankings_by_posting/
+## `GET` /host_rankings_by_listing/
 
-Get the rankings of the hosts by the number of postings in a specific location.
+Get the rankings of the hosts by the number of listing in a specific location.
 
-### Body Params
+### Query Params
 
 ```JSON
 {
     "country"?: string,
+    "subcountry"?: string,
     "city"?: string,
+    "postalCode"?: string
 }
 ```
 
@@ -100,6 +103,8 @@ Get the rankings of the hosts by the number of postings in a specific location.
 
 ```JSON
 {
+    "country": "Canada",
+    "subcountry": "Ontario",
     "city": "Toronto",
 }
 ```

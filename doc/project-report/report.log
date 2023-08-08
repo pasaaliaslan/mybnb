@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.23)  7 AUG 2023 21:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.23)  8 AUG 2023 02:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -438,25 +438,52 @@ Package hyperref Info: Link coloring OFF on input line 29.
 \@outlinefile=\write4
 \openout4 = `report.out'.
 
- [1{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 68.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+) [1{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
-] [2] (./report.aux)
+]
+<er.png, id=11, 1416.29124pt x 1054.94125pt>
+File: er.png Graphic file (type png)
+<use er.png>
+Package pdftex.def Info: er.png  used on input line 80.
+(pdftex.def)             Requested size: 495.70937pt x 369.23497pt.
+
+Overfull \hbox (25.95435pt too wide) in paragraph at lines 80--81
+[] 
+ []
+
+[2 <./er.png>]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 85.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 85.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Overfull \hbox (18.08427pt too wide) in paragraph at lines 107--108
+[]\OT1/ptm/m/n/10.95 Residence($[]$, res-i-dence-Type-Name,hostUsername,numberOfBedrooms, num-berOf-Beds, num-berOf-Baths, room-
+ []
+
+[3] [4] (./report.aux)
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 11452 strings out of 476025
- 180738 string characters out of 5790017
- 1862388 words of memory out of 5000000
- 31750 multiletter control sequences out of 15000+600000
- 516305 words of font info for 38 fonts, out of 8000000 for 9000
+ 11538 strings out of 476025
+ 181967 string characters out of 5790017
+ 1861388 words of memory out of 5000000
+ 31809 multiletter control sequences out of 15000+600000
+ 522593 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,76p,325b,529s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on report.pdf (2 pages, 34043 bytes).
+ 75i,11n,76p,344b,440s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on report.pdf (4 pages, 152448 bytes).
 PDF statistics:
- 35 PDF objects out of 1000 (max. 8388607)
- 26 compressed objects within 1 object stream
- 8 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 52 PDF objects out of 1000 (max. 8388607)
+ 37 compressed objects within 1 object stream
+ 11 named destinations out of 1000 (max. 500000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

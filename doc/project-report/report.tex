@@ -64,9 +64,91 @@ on Postman. Each endpoint is well documented under `./doc/apis'
 
 \section*{Assumptions}
 
+\begin{itemize}
+\item Country, Subcountry, and City tables are prepopulated as they are static (unless new countries, subcountries, and cities are established).
+User will choose one of the country, subcountry, city from the rows defined in these tables (i.e., no chance for user to input country/subcountry/city, eliminating the possibility of having inaccurate data).
+
+\item Ideally, postal code should have been static too. However, due to the small extent of this project, millions of postal codes are not put into a table and it is assumed that the users will enter valid postal codes for their addresses.
+
+\item It is assummed that street name and coordinate data matches with country/subcountry/city data inputted by the user.
+
+\end{itemize}
+
+\newpage
 \section*{ER Diagram}
 
-\section*{Schemas and Constraints}
+\includegraphics[scale=0.35]{er}
+
+\newpage
+\section*{Schemas}
+
+Country (\underline{name})
+
+Subcountry (\underline{name}, \underline{countryName})
+
+City (\underline{name}, \underline{subcountryName}, \underline{countryName})
+
+PostalCode (\underline{code}, \underline{cityName}, \underline{subcountryName}, \underline{countryName})
+
+Address (\underline{streetName}, \underline{postalCode}, \underline{cityName}, \underline{subcountryName}, \underline{countryName})
+
+Location (\underline{longitude}, \underline{latitude}, streetName, postalCode, cityName, subcountryName, countryName)
+
+User (\underline{username}, password, insuranceNumber, firstName, lastName, dateOfBirth, occupation)
+
+livesIn (\underline{username}, streetName, postalCode, cityName, subcountryName, countryName)
+
+Renter (\underline{username}, creditCardNumber)
+
+Host (\underline{username})
+
+ResidenceType(\underline{name})
+
+Residence(\underline{id}, residenceTypeName,hostUsername,numberOfBedrooms, numberOfBeds, numberOfBaths, roomNumber, longitude, latitude)
+
+Listing (\underline{id}, description, pricePerNight, availabilityStart, availabilityEnd, residenceId, isAvailable)
+
+AmenityCategory (\underline{name})
+
+Amenity (\underline{name}, amenityCategoryName)
+
+includes (\underline{residenceId}, \underline{amenityName})
+
+Booking (\underline{id}, startDate, endDate, renterUsername, listingId, pricePerNight, cancelledBy)
+
+reviewHost (\underline{commentedAt}, \underline{bookingId}, comment, rating)
+
+reviewRenter (\underline{commentedAt},  \underline{bookingId}, comment, rating)
+
+reviewVisit (\underline{commentedAt}, \underline{bookingId}, comment, rating)
+
+\section*{Constraints}
+\begin{itemize}
+  \item User
+  \begin{itemize}
+    \item The difference between dateOfBirth and TODAY should be at least 18 years.
+  \end{itemize}
+  \item Listing
+  \begin{itemize}
+    \item availabilityStart $\leq$ availabilityEnd.
+    \item A residence can have multiple listings, but none of the listings for the same residence have overlapping availability range.
+  \end{itemize}
+  \item Booking
+  \begin{itemize}
+    \item startDate $\leq$ endDate.
+    \item Start and end date of a booking is within the availability range of the listing that is booked.
+    \item No two bookings refer to same listing if their date range overlap.
+  \end{itemize}
+  \item ReviewHost, ReviewVisit, ReviewRenter.
+  \begin{itemize}
+    \item Rating should be between 1 and 5 (inclusive).
+    \item A review can be made after the visit is completed.
+    \item A review cannot be made in future.
+  \end{itemize}
+\end{itemize}
+
+
+\newpage
 
 \section*{Limitations and Areas of Improvement}
 
@@ -103,6 +185,10 @@ on Postman. Each endpoint is well documented under `./doc/apis'
   `Address' table through `livesIn' table. Let User A change his address (i.e. key in `Address' table).
   As A and B were refering the same row, the system would change the address of B too, which
   is not the case.
+
+  \item Price/amenity suggestion algorithm can be improved significantly by including different parameters
+  such as availability date range of the listing, number of baths/beds/bedrooms in the residence,
+  multivariable impacts of each amenity, etc.
 \end{enumerate}
 
 
