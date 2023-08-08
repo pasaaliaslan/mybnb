@@ -1,0 +1,35 @@
+1	Wifi
+2	Wifi
+3	Wifi
+4	Wifi
+5	Wifi
+6	Wifi
+7	Wifi
+1	Washer
+2	Washer
+3	Washer
+4	Washer
+5	Washer
+6	Washer
+1	Free Street Parking
+2	Free Street Parking
+3	Free Street Parking
+4	Free Street Parking
+5	Free Street Parking
+1	Free Driveway Parking
+2	Free Driveway Parking
+3	Free Driveway Parking
+4	Free Driveway Parking
+5	Free Driveway Parking
+1	BBQ Grill
+2	BBQ Grill
+3	BBQ Grill
+4	BBQ Grill
+1	Sun Loungers
+2	Sun Loungers
+3	Sun Loungers
+4	Sun Loungers
+1	Arcade Games
+2	Arcade Games
+3	Arcade Games
+4	Arcade Games

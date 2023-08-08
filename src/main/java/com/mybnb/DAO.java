@@ -45,17 +45,20 @@ public final class DAO {
     }
 
     public JSONObject get(String sqlQuery, GetHandler fn) throws BaseSQLStatusException {
+        System.out.println(String.format("RUNNING QUERY: %s", sqlQuery));
+
         try (Statement stmt = this.connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(sqlQuery);
-            System.out.println(String.format("QUERY: %s", sqlQuery));
 
             JSONObject response = fn.execute(rs);
 
             rs.close();
             stmt.close();
 
+            System.out.println("SUCCESS");
             return response;
         } catch (SQLException e) {
+            System.out.println("FAILED");
             throw SQLStatusExceptions.getException(e);
         }
     }
@@ -77,6 +80,7 @@ public final class DAO {
     }
 
     private int runUpdateQuery(String sqlQuery, boolean returnsId) throws BaseSQLStatusException {
+        System.out.println(String.format("QUERY: %s", sqlQuery));
         try {
             Statement stmt = this.connection.createStatement();
             int res = stmt.executeUpdate(sqlQuery);
@@ -91,10 +95,11 @@ public final class DAO {
 
             stmt.close();
 
-            System.out.println(String.format("QUERY: %s", sqlQuery));
+            System.out.println("SUCCESS");
             return res;
 
         } catch (SQLException e) {
+            System.out.println("FAIL");
             System.out.println(e.getMessage());
             throw SQLStatusExceptions.getException(e);
         }

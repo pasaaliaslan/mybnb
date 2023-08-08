@@ -40,7 +40,7 @@ Sun Loungers	Outdoor
 Private Outdoor Pool	Parking and Facilities
 Private Hot Tub	Parking and Facilities
 Sauna	Parking and Facilities
-Free Driveway	Parking Parking and Facilities
-Free Street	Parking	Parking and Facilities
+Free Driveway Parking	Parking and Facilities
+Free Street Parking	Parking and Facilities
 EV Charger	Parking and Facilities
 Private Gym	Parking and Facilities

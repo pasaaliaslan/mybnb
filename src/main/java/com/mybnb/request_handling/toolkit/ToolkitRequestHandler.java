@@ -15,7 +15,7 @@ public class ToolkitRequestHandler extends RequestHandler {
 
     public Map<String, Viewset> getViewsets() {
         HashMap<String, Viewset> viewsets = new HashMap<String, Viewset>();
-        viewsets.put("price_suggestion", new PriceSuggestion(dao));
+        viewsets.put("suggest", new Suggest(dao));
         return viewsets;
     }
 
