@@ -210,7 +210,7 @@ IF NEW.startDate < (SELECT availabilityStart FROM Listing WHERE id=NEW.listingId
 SET msg = 'Booking should be within the availability range of the listing.';
 SIGNAL sqlstate '45000' SET message_text = msg;
 END IF;
-IF 1 = (SELECT EXISTS(SELECT * FROM Booking WHERE Booking.listingId=NEW.listingId AND NEW.endDate > Booking.startDate AND Booking.endDate > NEW.startDate)) THEN
+IF 1 = (SELECT EXISTS(SELECT * FROM Booking WHERE Booking.listingId=NEW.listingId AND Booking.cancelledBy='NONEØ' AND NEW.endDate > Booking.startDate AND Booking.endDate > NEW.startDate)) THEN
 SET msg = 'The listing is booked within the date range.';
 SIGNAL sqlstate '45000' SET message_text = msg;
 END IF;
