@@ -33,11 +33,12 @@ public class Booking extends Viewset {
                 while (rs.next()) {
                     JSONObject booking = new JSONObject();
                     booking.put("id", rs.getInt("id"));
-                    booking.put("startDate", rs.getDate("startDate"));
-                    booking.put("endDate", rs.getDate("endDate"));
+                    booking.put("startDate", rs.getDate("startDate").toString());
+                    booking.put("endDate", rs.getDate("endDate").toString());
                     booking.put("renterUsername", rs.getString("renterUsername"));
                     booking.put("listingId", rs.getInt("listingId"));
                     booking.put("pricePerNight", rs.getDouble("pricePerNight"));
+                    bookings.add(booking);
                 }
 
                 response.put("bookings", bookings);
@@ -63,13 +64,14 @@ public class Booking extends Viewset {
 
         if (queryParams.has("renterUsername")) {
             String renterUsername = queryParams.getString("renterUsername");
-            sqlQuery = String.format("SELECT * FROM Booking WHERE renterUsername=%s %s", renterUsername, showBy);
+            sqlQuery = String.format("SELECT * FROM Booking WHERE renterUsername='%s' %s", renterUsername, showBy);
         } else if (queryParams.has("hostUsername")) {
             String hostUsername = queryParams.getString("hostUsername");
             sqlQuery = String.join(" ",
-                    "SELECT Booking.id AS id, startDate, endDate, renterUsername, listingId, pricePerNight",
+                    "SELECT Booking.id AS id, startDate, endDate, renterUsername, listingId, Booking.pricePerNight AS pricePerNight",
                     "FROM Booking JOIN Listing ON Booking.listingId=Listing.id",
-                    String.format("WHERE hostUsername=%s %s", hostUsername, showBy));
+                    "JOIN Residence ON Residence.id=Listing.residenceId",
+                    String.format("WHERE hostUsername='%s' %s", hostUsername, showBy));
 
         } else {
             return Http.MESSAGE_RESPONSE("A renter or a host username must be provided.", Http.STATUS.BAD_REQUEST);
@@ -120,7 +122,7 @@ public class Booking extends Viewset {
             return Http.MESSAGE_RESPONSE("No responsible", Http.STATUS.BAD_REQUEST);
         }
 
-        keyConditions.put("bookingId", requestBody.getString("bookingId"));
+        keyConditions.put("id", requestBody.getInt("bookingId"));
         newMapping.put("cancelledBy", requestBody.getString("cancelledBy"));
 
         try {
